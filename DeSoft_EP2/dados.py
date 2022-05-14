@@ -1,4 +1,4 @@
-from funcoes import normaliza
+from DeSoft_EP2.funcoes import normaliza
 
 
 
