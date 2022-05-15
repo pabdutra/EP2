@@ -2,6 +2,7 @@ from random import choice
 from math import *
 
 
+
 # Normaliza Base de Países
 def normaliza (dic):
     dicn = {}
@@ -10,6 +11,7 @@ def normaliza (dic):
             dicn[k2] = v2
             v2['continente'] = k
     return dicn
+
 
 
 # Sorteia Países
@@ -50,6 +52,7 @@ def adiciona_em_ordem (nome_pais, dist, lpd):
     return lpd
 
 
+
 # Checa presença na lista
 def esta_na_lista (nome_pais, lpd):
     presente = False
@@ -58,6 +61,7 @@ def esta_na_lista (nome_pais, lpd):
             presente = True
             break
     return presente
+
 
 
 # Sorteia Letra com Restrições
@@ -74,6 +78,7 @@ def sorteia_letra (palavra, lista_restricao):
         return ''
     else:
         return choice(validos)
+
 
 
 # Distância entre países (lista --> string)
@@ -94,3 +99,17 @@ def addlpds (lpd, lpds):
     lpds += '\033[0;0;40m\n'
     return lpds
 
+
+
+# Define cores da bandeira em ordem de frequência
+def lista_bandeira (dic, nome_pais):
+    freq_cores = []
+    for v in dic[nome_pais]['bandeira'].values():
+        freq_cores.append(v)
+    freq_cores.sort(reverse=True)
+    cores_bandeira = []
+    for i in range(0, len(freq_cores)):
+        for k2, v2 in dic[nome_pais]['bandeira'].items():
+            if freq_cores[i] == v2 and v2 != 0 and k2 not in cores_bandeira:
+                cores_bandeira.append(k2)
+    return cores_bandeira
