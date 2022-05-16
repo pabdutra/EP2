@@ -3,23 +3,27 @@ from dados import earth_radius as re
 from funcoes import *
 from strings import *
 
+print(intro)
 
-pais_sorteado = sorteia_pais(dadosn)
-end = False
-chances = 20
-lpd = []
-lpds = ''
-print(pais_sorteado)
+stop = False
+while stop == False:
 
-print(chamada+comandos)
+    pais_sorteado = sorteia_pais(dadosn)
+    end = False
+    chances = 20
+    lpd = []
+    lpds = ''
+#print(pais_sorteado)
+
+    print(chamada+comandos)
 
 
-while end == False and chances > 0:
+    while end == False and chances > 0:
 
-    palpite = input('Qual seu palpite? ').lower()
-    em_lpd = esta_na_lista(palpite, lpd)
+        palpite = input('Qual seu palpite? ').lower()
+        em_lpd = esta_na_lista(palpite, lpd)
 
-    if palpite == 'dicas' or palpite == 'dica':
+        if palpite == 'dicas' or palpite == 'dica':
             ddisponiveis = ''
             if chances < 4 and dica1 in lddisponiveis:
                 lddisponiveis.remove(dica1)
@@ -109,10 +113,10 @@ while end == False and chances > 0:
             elif chances <= 20:
                 print(lpds+suasdicas+'\nVocê ainda tem \033[0;32;40m{}\033[0;0;40m tentativa(s)'.format(chances))
 
-    elif palpite == 'comandos':
+        elif palpite == 'comandos':
             print(comandos)
 
-    elif palpite in dadosn.keys():
+        elif palpite in dadosn.keys():
             if palpite.lower() == pais_sorteado:
                 print('\033[1;32;40mParabéns, você acertou!!!\033[0;0;40m')
                 end = True
@@ -131,3 +135,36 @@ while end == False and chances > 0:
                     print(lpds+suasdicas+'\nVocê ainda tem \033[0;33;40m{}\033[0;0;40m tentativa(s)'.format(chances))
                 elif chances <= 20:
                     print(lpds+suasdicas+'\nVocê ainda tem \033[0;32;40m{}\033[0;0;40m tentativa(s)'.format(chances))
+
+        elif palpite == 'desisto':
+            print('Poxa, você desistiu. O país era {}'.format(pais_sorteado))
+            end = True
+
+        else:
+            print('\033[0;31;40m\nPaís desconhecido!'+' \n\033[0;0;40m')
+
+    if chances == 0:
+        print('\nSuas chances acabaram, você perdeu! O país era {}\n'. format(pais_sorteado))
+        dnv = input('Deseja jogar novamente? s|n ')
+        if dnv == 's':
+            stop = False
+        elif dnv == 'n':
+            stop = True
+            sair = input('\nTem certeza que quer sair do jogo? s|n ')
+            if sair == 's':
+                stop = True
+            elif sair == 'n':
+                stop = False
+            else:
+                print('\033[0;31;40m\nOpção inválida!\033[0;0;40m')
+        else:
+            print('\033[0;31;40m\nOpção inválida!\033[0;0;40m')
+
+    elif end == True:
+        sair = input('\nTem certeza que quer sair do jogo? s|n ')
+        if sair == 's':
+            stop = True
+        elif sair == 'n':
+            stop = False
+        else:
+            print('\033[0;31;40m\nOpção inválida!\033[0;0;40m')
